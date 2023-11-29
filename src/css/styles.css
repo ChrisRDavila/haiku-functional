@@ -1,3 +1,8 @@
 body {
   background-color: lightblue;
 }
+
+textarea {
+width: 2000px;
+height: 2000px;
+}
