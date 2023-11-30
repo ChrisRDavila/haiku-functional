@@ -1,28 +1,28 @@
-const clonedeep = require('lodash.clonedeep');
-const { syllableCount } = require('./haikuref');
-// const clonedeep = require('lodash/clonedeep');
+// const clonedeep = require('lodash.clonedeep');
+// const { syllableCount } = require('./haikuref');
+// // const clonedeep = require('lodash/clonedeep');
 
-// const objectCopy = clonedeep(originalObject);
+// // const objectCopy = clonedeep(originalObject);
 
-const storeState = () => {
-  let currentState = {};//fill with current object state and hang on to it
-  return (stateChangeFunction) => { //return inner function
-    const newState = stateChangeFunction(clonedeep(currentState)); //create new state that can be returned
-    currentState = clonedeep(newState);//set current state to new state
-    return newState;//return updated clone
-  }
-}
+// const storeState = () => {
+//   let currentState = {};//fill with current object state and hang on to it
+//   return (stateChangeFunction) => { //return inner function
+//     const newState = stateChangeFunction(clonedeep(currentState)); //create new state that can be returned
+//     currentState = clonedeep(newState);//set current state to new state
+//     return newState;//return updated clone
+//   }
+// }
 
-const stateControl = storeState();
+// const stateControl = storeState();
 
-const assignState = (syllableCount) => {
-  return (increment) => {
-    return (state)({
-      ...state,
-      [syllableCount]: (state[syllableCount] || 0) + increment
-    })
-  }
-}
+// const assignState = (syllableCount) => {
+//   return (increment) => {
+//     return (state)({
+//       ...state,
+//       [syllableCount]: (state[syllableCount] || 0) + increment
+//     })
+//   }
+// }
 //STARTING HERE/////////////////////////////////////////////////////////////////////////////////
 // Check if word is three letters or less, if so, 1 syllable (check length of word, create array if needed)
 // Count vowel groups, they usually count as one syllable (have list of vowels, make comparison somehow?)
@@ -72,7 +72,7 @@ function countSyllables(word) {
     const currentChar = word[index].toLowerCase();
     const isVowel = vowels.includes(currentChar);
 
-    console.log(`Index: ${index}, Char: ${currentChar}, IsVowel: ${isVowel}, SyllCount: ${syllableCount}, PrevVowel: ${previousCharWasVowel}`);
+    // console.log(`Index: ${index}, Char: ${currentChar}, IsVowel: ${isVowel}, SyllCount: ${syllableCount}, PrevVowel: ${previousCharWasVowel}`);
 
 
     if (index > 0 && twoSyllableVowels.includes(word[index - 1].toLowerCase() + currentChar)) {
@@ -88,7 +88,7 @@ function countSyllables(word) {
     }
 
     return incrementSyllableCount(syllableCount, index + 1, isVowel); //continue recursion w next letter
-  }
+  };
 
   let syllableCount = incrementSyllableCount(0, 0, false); //no longer breaks everything
 
@@ -99,10 +99,10 @@ function countSyllables(word) {
   if (word.endsWith('y') && word.length > 1) {
     const secondLastChar = word[word.length - 2].toLowerCase();
     if (!vowels.includes(secondLastChar)) {
-      syllableCount++
+      syllableCount++;
     }
   }
-  return syllableCount;;
+  return syllableCount;
 }
 
 // checkHaiku("Delightful display, Snowdrops bow their pure white heads, to the suns glory");
@@ -120,29 +120,4 @@ export function checkHaiku(haiku) {
   return lines.map(countSyllablesInLine).every((count, index) => count === syllablePattern[index]);
 }
 
-//REFERENCE STUFF------------------------------------
-const recurseReverse = (words) => {
-  const wordsArray = words.split(" ");
 
-  if (wordsArray.length === 1 && wordsArray[0] === "") {
-    return "";
-  } else {
-    const remainingWords = wordsArray.slice(1).join(" ");
-    const reversedWords = recurseReverse(remainingWords);
-    return (reversedWords ? reversedWords + " " : "") + wordsArray[0];
-  }
-}
-
-const words = "Hello World in JavaScript";
-const reversedWords = recurseReverse(words);
-
-console.log(reversedWords);
-
-const rgrString = (num) => {
-  if (num > 0) {
-    return "red green refactor " + rgrString(num - 1);
-  }
-  else {
-    return "";
-  }
-}

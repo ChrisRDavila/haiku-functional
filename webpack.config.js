@@ -27,7 +27,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.(gif|png|avif|jpe?g)$/,
@@ -39,9 +42,11 @@ module.exports = {
         },
       },
       {
-        test: /\.html$/,
-        use: ["html-loader"],
+        test:/\.html$/,
+        use: [
+          'html-loader'
+        ]
       },
-    ],
-  },
+    ]
+  }
 };
