@@ -1,8 +1,8 @@
-# (Application Name)
+# Haiku-functional
 
-#### (Brief Description of Application)
+#### building a huika using functional programming and state
 
-#### By (Your Name Here)
+#### By Christopher Davila
 
 ## Technologies Used
 
